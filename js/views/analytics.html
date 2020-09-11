@@ -1,0 +1,136 @@
+<div class="row">
+    <div class="dashboard-row">           
+        <div class="col-md-6 col-xs-12">
+            <div class="pressure box-header border text-center">
+                <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Statistics of Health issues due to Bad Posture</h3>                 
+            </div>
+            <hr/>
+            <div id='chart-container'>
+                <oj-chart id="barChart"
+                          type="bar" 
+                          orientation="[[orientationValue]]"
+                          stack="[[stackValue]]"
+                          series="[[barSeriesValue]]"
+                          groups="[[barGroupsValue]]"
+                          stack-label="[[stackLabelValue]]"  
+                          animation-on-display="auto"
+                          animation-on-data-change="auto"
+                          hover-behavior="dim"
+                          legend.position="top"
+                          value-formats.series.tooltip-label="[[seriesOption]]"
+                          value-formats.group.tooltip-display="[[tooltipDisplayGroup]]"
+                          value-formats.group.tooltip-label="[[groupOption]]"
+                          value-formats.value.tooltip-label="Percentage"
+                          style="width:100%;height:350px;float:right;">
+                </oj-chart>            
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <div class="pressure box-header border text-center">
+                <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Benefits of Smart Seat</h3>                 
+            </div>
+            <hr/>
+            <div >
+                <div class="col-md-6">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-red-gradient text-center bold">
+                            Bad Posture v/s Good Posture                     
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                            Soreness & Back Pain
+                            <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                            Poor Blood Circulation
+                            <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                            Negative Mood 
+                            <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                            Increased Stress
+                            <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                            Weak Eyesight
+                            <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                            Fatigue
+                            <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                        </li>
+                    </ul>                    
+                </div>
+                <div class="col-md-6">
+                   <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-green-gradient text-center bold">
+                            Effects of Good Posture                     
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                            Good muscle flexibility
+                            <i class="fa fa-check text-right" style="font-size:20px;color:green;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                            Self-Image Boost  
+                            <i class="fa fa-check text-right" style="font-size:20px;color:green;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                             Improved Concentration 
+                            <i class="fa fa-check text-right" style="font-size:20px;color:green;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                            Positive Feelings
+                            <i class="fa fa-check text-right" style="font-size:20px;color:green;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                            Good blood Circulation
+                           <i class="fa fa-check text-right" style="font-size:20px;color:green;"></i>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                            Better Breathing
+                            <i class="fa fa-check text-right" style="font-size:20px;color:green;"></i>
+                        </li>
+                    </ul>           
+                </div>
+            </div>   
+        </div>
+    </div>      
+</div>
+
+<div class="row">
+    <div class="dashboard-row">           
+        <div class="col-md-6 col-xs-12">
+            <div class="pressure box-header border text-center">
+                <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Statistics of Work-related ill Health</h3>                 
+            </div>
+            <hr/>
+            <div id='chart-container'>
+                <oj-chart id="pieChart"
+                          type="pie" 
+                          series="[[pieSeriesValue]]"
+                          animation-on-display="auto"
+                          animation-on-data-change="auto"
+                          style-defaults.three-d-effect="[[threeDValue]]"
+                          hover-behavior="dim"
+                          legend.position="top"
+                          style="width:100%;height:350px;float:right;">
+                </oj-chart>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <div class="pressure box-header border text-center">
+                <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Sitting Posture</h3>                 
+            </div>
+            <hr/>
+            <div >
+                <img src="./css/images/Sitting_Posture.jpg" alt="Smiley face" height="70%" width="100%" style="margin-top: 5%">
+            </div>   
+        </div>
+    </div>      
+</div>
+
+
+

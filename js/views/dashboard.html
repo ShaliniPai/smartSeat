@@ -1,0 +1,259 @@
+<script type='text/javascript' src="http://cdn.firebase.com/js/client/1.0.15/firebase.js"></script>
+
+<div class='row'>
+    <div id="liftResult" class="col-xs-12">
+        <div class="box box-warning">
+            <div class="box-header">
+                <h3 class="box-title">Select User</h3>
+            </div>
+
+
+            <div class='box-body center-block'>
+                <div class="row" style=" padding: 5px;">
+                    <div class="col-md-3 col-xs-6" >
+                        <oj-label   for="status">Username</oj-label>
+                        <!--                        <oj-select-one id="status"  value="{{userName}}"   options="{{userNameLkp}}">
+                                                </oj-select-one>-->
+                        <input id="combobox" list="browsers"  data-bind="ojComponent: {component: 'ojCombobox', optionChange: valueChangeHandler, rootAttributes: {style:'max-width:20em'}}"/>  
+                        <datalist id="browsers">
+                            <!-- ko foreach:userNameLkp -->
+                            <option data-bind="value:value,text:label">[[value]]</option>
+                            <!--/ko -->
+                        </datalist>
+                    </div>
+
+                    <div class="col-md-3 col-xs-6" >
+                        <oj-label for="Load"></oj-label>
+                        <button class='btn btn-danger' style="width: 90px;font-weight: bold" on-click="[[Load]]" >Load</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr/>
+
+
+<div id="dashboardData" style="display: none">
+    <div class="row">
+        <div class="dashboard-row">           
+            <div class="col-md-3 col-xs-12 hoverClick">
+                <!-- small box -->
+                <div class="small-box" id="occupancyColor" >
+                    <div class="inner">
+
+                        <h3 class="fontcolor text-center" style="margin-top: 22px; margin-bottom: 42px;" ><span data-bind="text:occupancyLabel"></span></h3>        
+                    </div>
+                    <!--                    <div class="icon">
+                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                        </div>-->
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-12">
+                <!-- small box -->
+                <div class="small-box pressure">
+                    <div class="inner fontcolor ">
+                        <p style="font-size: 25px" class=" fontcolor text-white bold">Chair Height</p>
+                        <h3 class="fontcolor" style="margin-top: 20px;"><sup style="font-size: 35px; color: white;"> 41 </sup></h3>  
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-wheelchair" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+                <div class="row pressure">
+                    <p style="font-size: 18px;margin-top: 10px" class=" fontcolor text-white text-center bold"> Posture Metrics for Good Posture </p> 
+                </div>
+
+                <div class=" row pressure">
+                    <div class="col-xs-4 text-center fontcolor" style="border-right: 1px solid #f4f4f4" >
+                        <h3 class="fontcolor" data-bind="text:tilt" ></h3>  
+                        <div class="text-white bold">Chair Tilt</div>
+                        <span class="description-percentage text-yellow bold" >(<i class="fa fa-caret-up"></i> Less than 380)</span>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-xs-4 text-center fontcolor" style="border-right: 1px solid #f4f4f4">
+                        <h3 class="fontcolor" data-bind="text: backPosition" ></h3>  
+                        <div class="text-white bold">Back Posture</div>
+                        <span class="description-percentage text-yellow bold" >(<i class="fa fa-caret-up"></i> Between 100 to 120)</span>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-xs-4 text-center fontcolor" style="border-right: 1px solid #f4f4f4">
+                        <h3 class="fontcolor" data-bind="text: legPositionLabel" ></h3>  
+                        <div class="text-white bold">Leg Position</div>
+                        <span class="description-percentage text-yellow bold" >(<i class="fa fa-caret-up"></i> Between 30 to 199)</span>
+                    </div>
+                </div>                
+            </div>
+        </div>   
+    </div>
+    <hr/>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="box box-solid border dashboard-header">
+                <div class="dashboard-header box-header border text-center">
+                    <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Back Posture</h3>                 
+                </div>
+                <hr/>
+                <div class="row" data-bind="visible: occupancy() == 0">
+                    <div id="BackPostureImageI" class="col-md-6 col-xs-12">
+                        <img id="BackPostureImage" style="padding-bottom: 70px;" src="" alt="UltrasonicImage" height="350pt" width="100%">
+                    </div>  
+                    <div id="PostureValues" class="col-md-6 col-xs-12" >
+                        <ul id="BadPosture" class="list-group" style="display: none">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-red-gradient text-center bold">
+                                Bad Posture                     
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Sit up with your back straight  
+                                <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                                Distribute your body weight evenly on both Hips
+                                <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Your buttocks should touch the back of your chair
+                                <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                                All 3 normal back curves should be present while sitting
+                                <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Try to avoid sitting in the same position for more than 30 minutes
+                                <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Keep your shoulders back
+                                <i class="fa fa-times text-right" style="font-size:20px;color:red;"></i>
+                            </li>
+                        </ul> 
+
+                        <ul id="GoodPosture" class="list-group" style="display: none">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-green-gradient text-center bold">
+                                Good Posture                      
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Back Straight
+                                <i class="fa fa-check text-right" style="font-size:20px;color:greenyellow;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                                Body weight evenly distributed on both Hips
+                                <i class="fa fa-check text-right" style="font-size:20px;color:greenyellow;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Buttocks is touching the back of your chair
+                                <i class="fa fa-check text-right" style="font-size:20px;color:greenyellow;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray">
+                                3 curves are in right position
+                                <i class="fa fa-check text-right" style="font-size:20px;color:greenyellow;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Not sitting in the same position for more than 30 minutes
+                                <i class="fa fa-check text-right" style="font-size:20px;color:greenyellow;"></i>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-gray-light">
+                                Shoulders back
+                                <i class="fa fa-check text-right" style="font-size:20px;color:greenyellow;"></i>
+                            </li>
+                        </ul>                    
+
+                    </div>  
+
+                </div>  
+
+                <!-- /.box-header -->
+
+            </div>
+            <!-- /.box -->
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <div class="box box-solid border dashboard-header">
+                <div class="dashboard-header box-header border text-center">
+                    <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Leg Inclination</h3>                 
+                </div>
+                <hr/>
+                <div class="row" style="height: 260pt" data-bind="visible: occupancy() == 0">
+                    <div id="LegPosture" class="col-md-6 col-xs-12" >
+                        <img id="legPosture" style="padding-top: 60px" src="" alt="LegPosture" height="300pt" width="100%">
+                    </div>  
+                    <div id="Outcome" class="col-md-6 col-xs-12">
+                        <img id="outcomeMark" style="padding-top: 60px; padding-left :30px;" src="" alt="outcome" height="200pt" width="70%">     
+                    </div>  
+                </div>
+
+            </div>
+            <!-- /.box -->
+        </div>
+    </div>
+    <hr/>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="box box-solid border dashboard-header">
+                <div class="dashboard-header box-header border text-center">
+                    <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Chair Tilt</h3>                 
+                </div>
+                <hr/>
+                <div class="row" data-bind="visible: occupancy() == 0">
+                    <div id="BackPostureImageI" class="col-md-6 col-xs-12">
+                        <div class="occupancy box-header border text-center">
+                            <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Current Position</h3>                 
+                        </div>
+                        <hr/>
+                        <img class="center" id="TiltImage" style="padding-bottom: 70px;" src="" alt="TiltImage" height="350pt" width="90%">
+                    </div> 
+                    <div id="OutcomeTilt" class="col-md-6 col-xs-12">
+                        <div class="occupancy box-header border text-center">
+                            <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Expected Position</h3>                 
+                        </div>
+                        <hr/>
+                        <img id="outcomeMarkTilt" alt="ExpectedTiltPosture" style="padding-bottom: 70px;" src="css/images/Tilt/Straight.PNG" height="350pt" width="90%">     
+                    </div>  
+
+                </div>  
+
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12" >
+            <div class="box box-solid border dashboard-header">
+                <div class="dashboard-header box-header border text-center">
+                    <h3 class="box-title text-white text-center fontcolor bold" style="text-align: center">Water Consumption Reminder</h3>                 
+                </div>
+                <hr/>
+                <div class="row" data-bind="visible: occupancy() == 0">
+                    <div id="BackPostureImageI" class=" row col-md-12 col-xs-12 center">
+                        <div class="row" style="width: 100%" >
+                            <!--                            <span id="time" class=" bold" style="background:aliceblue;font-size: 18pt;margin-right: 100px;float: center">00:60</span> -->
+                            <p style="padding-left: 350px;font-size: 18pt;" id="time" class=" bold">00:60<p>
+                        </div>   
+                        <div class="row center" style="height:280pt">
+                            <img class="shake center" id="shakeDiv" style="padding-bottom: 70px;display: none;padding-left: 250px" src="css/images/bell.png" alt="waterReminder" height="320pt" width="70%">
+                        </div>
+
+
+
+                    </div> 
+
+
+                    <div id="snackbar" class="col-md-3 col-xs-12 pressure">You have been sitting for long..Time to Stretch !!!</div>
+
+                </div>  
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
